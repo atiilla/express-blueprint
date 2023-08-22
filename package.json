@@ -1,8 +1,9 @@
 {
-  "name": "expressblueprint",
-  "version": "1.0.0",
+  "name": "exprez",
+  "version": "0.0.5",
   "description": "This tool will generate an Express project structure for you",
   "main": "index.js",
+  "bin":"index.js",
   "scripts": {
     "test": "jest",
     "start": "node index.js"
@@ -17,12 +18,12 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/atiilla/express-generator.git"
+    "url": "https://github.com/atiilla/express-blueprint.git"
   },
   "bugs": {
-    "url": "https://github.com/atiilla/express-generator/issues"
+    "url": "https://github.com/atiilla/express-blueprint/issues"
   },
-  "homepage": "https://github.com/atiilla/express-generator",
+  "homepage": "https://github.com/atiilla/express-blueprint",
   "devDependencies": {
     "jest": "^29.6.3"
   }

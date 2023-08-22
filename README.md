@@ -1,4 +1,4 @@
-# Express-Blueprint
+# Express.js Boilerplate Generator
 ## Express Project Generator Tool
 
 ![Version](https://img.shields.io/badge/version-0.1-blue.svg)
@@ -30,12 +30,12 @@ This tool generates a basic Express project structure, including DB connection, 
 2. Install the package globally:
 
 ```
-npm install -g express-blueprint
+npm install -g exprez
 ```
 
 3. Run the command in your workspace folder in the terminal:
 ```
-express-blueprint
+exprez
 ```
 
 4. Answer the questions and you're good to go!

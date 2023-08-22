@@ -1,10 +1,12 @@
+#!/usr/bin/env node
+const path = require("path");
 const {
     clear,
     colors,
     createDirectory,
     createFile,
     displayMessage,
-} = require('./modules/utils');
+} = require(path.join(__dirname, "modules", "utils"));
 
 const readline = require('readline');
 
@@ -13,8 +15,8 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-const withMongo = require("./modules/withMongo");
-const withMysql = require('./modules/withMysql');
+const withMongo = require(path.join(__dirname, "modules", "withMongo"));
+const withMysql = require(path.join(__dirname, "modules", "withMysql"));
 
 
 clear();
