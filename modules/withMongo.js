@@ -43,7 +43,6 @@ module.exports = (mongodbUri, portNumber, jwtSecret, projectName, rl) => {
         mongoose.connect(process.env.MONGO_URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        useCreateIndex: true
         }).then(() => {
             console.log('Database connected');
         }).catch((err) => {
@@ -59,9 +58,22 @@ router.get('/', home);
 
 module.exports = router;`);
 
+createFile('routes/user.js', `
+const express = require('express');
+const router = express.Router();
+const { register, login } = require('../controller/user');
+
+router.post('/register', register);
+router.post('/login', login);
+
+module.exports = router;
+
+`);
+
             createFile('controller/index.js', `const home = (req, res) => {
-res.send('Hello World');
+                res.render('index', { title: 'Exprez' });
 };
+
 
 module.exports = {
 home
@@ -169,6 +181,9 @@ module.exports = User;`);
 const app = express();
 const cors = require('cors');
 const dotenv = require('dotenv');
+const cookieParser = require('cookie-parser');
+const createError = require('http-errors');
+const logger = require('morgan');
 const path = require('path');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit')
@@ -181,8 +196,13 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use('/public', express.static(path.join(__dirname, 'public')));
-
+app.use(logger('dev'));
+app.use(cookieParser());
 app.use(helmet())
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
 
 const limiter = rateLimit({
 	windowMs: 15 * 60 * 1000, // 15 minutes
@@ -199,6 +219,11 @@ require('./config/db')();
 
 app.use('/', indexRouter);
 app.use('/user', userRouter);
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+next(createError(404));
+});
 
 app.listen(process.env.PORT || 3000, () => {
 console.log('Server is running on port ' + (process.env.PORT || 3000));
@@ -224,6 +249,10 @@ console.log('Server is running on port ' + (process.env.PORT || 3000));
                     - Error handling
                     - CORS
                     - Helmet
+                    - Morgan logger
+                    - Created a dockerfile
+                    - Created a docker-compose file
+                    - View engine setup
                     - Created a home route
                     - Created a user route
 

@@ -6,22 +6,27 @@
 
 This tool generates a basic Express project structure, including DB connection, routes, controllers, and more.
 
+![lazy developer](https://raw.githubusercontent.com/atiilla/express-blueprint/main/logo.jpg)
+
+
+
 ## Features
 
 - Initializes an npm project
 - Creates project well-structured folder structure
 - Configures MongoDB/MySQL connection
-- Generates sample route, controller, model and public folder
+- Generates sample route, controller, model, views and public folders
 - Authentication with JWT
 - Helmet
 - CORS
-- Anti XSS
 - Error handling
 - Rate limiting
+- View engine (EJS)
+- Morgan logger
+- Dockerfile and docker-compose.yml
 
 ## What's Next
-- Front-end
-- Dockerfile
+- [ ] Add more DB options
 
 ## Usage
 

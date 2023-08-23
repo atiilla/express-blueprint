@@ -78,7 +78,7 @@ module.exports = mysql.createConnection({
 
             createFile('controller/index.js', `
                 const home = (req, res) => {
-                    res.send('Hello World');
+                    res.render('index', { title: 'Exprez' });
                 };
                 
                 module.exports = {
@@ -184,6 +184,9 @@ JWT_SECRET="${jwtSecret}"
                 const app = express();
                 const cors = require('cors');
                 const dotenv = require('dotenv');
+                const createError = require('http-errors');
+                const cookieParser = require('cookie-parser');
+                const logger = require('morgan');
                 const path = require('path');
                 const helmet = require('helmet');
                 const rateLimit = require('express-rate-limit')
@@ -197,7 +200,13 @@ JWT_SECRET="${jwtSecret}"
                 app.use(express.json());
                 app.use(express.urlencoded({ extended: false }));
                 app.use(helmet())
+                app.use(logger('dev'));
+                app.use(cookieParser());
                 app.use('/public', express.static(path.join(__dirname, 'public')));
+
+                // view engine setup
+                app.set('views', path.join(__dirname, 'views'));
+                app.set('view engine', 'ejs');
 
                 const limiter = rateLimit({
                     windowMs: 15 * 60 * 1000, // 15 minutes
@@ -220,6 +229,11 @@ JWT_SECRET="${jwtSecret}"
                 
                 app.use('/', indexRouter);
                 app.use('/user', userRouter);
+
+                // catch 404 and forward to error handler
+                app.use(function(req, res, next) {
+                next(createError(404));
+                });
                 
                 app.listen(process.env.PORT || 3000, () => {
                     console.log('Server is running on port ' + (process.env.PORT || 3000));
@@ -246,6 +260,10 @@ JWT_SECRET="${jwtSecret}"
                     - Error handling
                     - CORS
                     - Helmet
+                    - Morgan logger
+                    - Created a dockerfile
+                    - Created a docker-compose file
+                    - View engine setup
                     - Created a home route
                     - Created a user route
 

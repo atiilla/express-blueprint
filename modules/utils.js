@@ -29,7 +29,7 @@ module.exports = {
     },
     installDependencies: (dbType) => {
         return new Promise((resolve, reject) => {
-            exec(`npm i express cors ${dbType} helmet express-rate-limit jsonwebtoken bcryptjs --save`, (error) => {
+            exec(`npm i express cors ${dbType} helmet express-rate-limit morgan ejs http-errors cookie-parser jsonwebtoken bcryptjs --save`, (error) => {
                 if (error) {
                     reject(error);
                 } else {
